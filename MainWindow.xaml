@@ -1,0 +1,70 @@
+﻿<Window x:Class="PongMe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PongMe"
+        mc:Ignorable="d"
+        Title="PongMe"
+        Width="750"
+        Height="500" 
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        ResizeMode="NoResize">
+
+    <Border CornerRadius="25" Background="WhiteSmoke">
+        <Grid RenderOptions.BitmapScalingMode="LowQuality" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.80*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.05*"></RowDefinition>
+                <RowDefinition Height="0.60*"></RowDefinition>
+                <RowDefinition Height="0.05*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="0.30*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--________________________________________________________-->
+
+            <Canvas Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3">
+                <Canvas.Background>
+                    <ImageBrush Opacity="0.6" ImageSource="Materials/Photo/bg.png"></ImageBrush>
+                </Canvas.Background>
+            </Canvas>
+
+            <!--________________________________________________________-->
+
+            <DockPanel VerticalAlignment="Center">
+                <Image x:Name="Logo" Margin="20 15" HorizontalAlignment="Left" Source="Materials/Icons/logo.png" VerticalAlignment="Top" Stretch="Uniform"></Image>
+            </DockPanel>
+            <Image Grid.Column="4" x:Name="Close" Margin="20 15" HorizontalAlignment="Right" Source="Materials/Icons/close.png" VerticalAlignment="Center" MouseDown="Close_MouseDown"/>
+
+            <!--________________________________________________________-->
+            <StackPanel Margin="10 0 0 0" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
+                <Image x:Name="Settings" Margin="10 25" Source="Materials/Icons/settings.png" Stretch="Uniform"></Image>
+                <Image x:Name="Share" Margin="10 25" Source="Materials/Icons/share.png" Stretch="Uniform"></Image>
+                <Image x:Name="Faq" Margin="10 25" Source="Materials/Icons/faq.png" Stretch="Uniform"></Image>
+            </StackPanel>
+            <DockPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                <WrapPanel HorizontalAlignment="Right">
+                    <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+                        <TextBlock Text="Martin Turin" HorizontalAlignment="Center" FontSize="15" FontFamily="Bahnschrift" Padding="0 5"></TextBlock>
+                        <TextBlock Text="example@gmail.com" HorizontalAlignment="Center" FontSize="10" FontFamily="Bahnschrift"></TextBlock>
+                    </StackPanel>
+                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="Materials/Photo/avatar.png" Stretch="Uniform"></Image>
+                </WrapPanel>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>
