@@ -37,22 +37,35 @@
 
             <!--________________________________________________________-->
 
-            <Canvas Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3">
-                <Canvas.Background>
-                    <ImageBrush Opacity="0.6" ImageSource="Materials/Photo/bg.png"></ImageBrush>
-                </Canvas.Background>
-            </Canvas>
+            <!--<Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Opacity="0.9" Background="Transparent" BorderBrush="Black" BorderThickness="0,3,0,0" Margin="0,0.5,0,0">
+                <Border.Effect>
+                    <BlurEffect Radius="8" KernelType="Gaussian"/>
+                </Border.Effect>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Opacity="0.9" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,3" Margin="0,0.5,0,0">
+                <Border.Effect>
+                    <BlurEffect Radius="8" KernelType="Gaussian"/>
+                </Border.Effect>
+            </Border>-->
 
             <!--________________________________________________________-->
 
+            <Frame x:Name="Page" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3" Background="DarkSlateGray" NavigationUIVisibility="Hidden">
+
+            </Frame>
+
+            <!--________________________________________________________-->
+            
             <DockPanel VerticalAlignment="Center">
-                <Image x:Name="Logo" Margin="20 15" HorizontalAlignment="Left" Source="Materials/Icons/logo.png" VerticalAlignment="Top" Stretch="Uniform"></Image>
+                <Image x:Name="Logo" Margin="20 15" HorizontalAlignment="Left" Source="Materials/Icons/logo.png" VerticalAlignment="Top" Stretch="Uniform" MouseDown="Logo_MouseDown"></Image>
             </DockPanel>
             <Image Grid.Column="4" x:Name="Close" Margin="20 15" HorizontalAlignment="Right" Source="Materials/Icons/close.png" VerticalAlignment="Center" MouseDown="Close_MouseDown"/>
-
+            
             <!--________________________________________________________-->
+            
             <StackPanel Margin="10 0 0 0" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
-                <Image x:Name="Settings" Margin="10 25" Source="Materials/Icons/settings.png" Stretch="Uniform"></Image>
+                <Image x:Name="Settings" Margin="10 25" Source="Materials/Icons/settings.png" Stretch="Uniform" MouseDown="Settings_MouseDown"></Image>
                 <Image x:Name="Share" Margin="10 25" Source="Materials/Icons/share.png" Stretch="Uniform"></Image>
                 <Image x:Name="Faq" Margin="10 25" Source="Materials/Icons/faq.png" Stretch="Uniform"></Image>
             </StackPanel>
@@ -62,9 +75,12 @@
                         <TextBlock Text="Martin Turin" HorizontalAlignment="Center" FontSize="15" FontFamily="Bahnschrift" Padding="0 5"></TextBlock>
                         <TextBlock Text="example@gmail.com" HorizontalAlignment="Center" FontSize="10" FontFamily="Bahnschrift"></TextBlock>
                     </StackPanel>
-                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="Materials/Photo/avatar.png" Stretch="Uniform"></Image>
+                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="Materials/Photo/avatar.png" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
                 </WrapPanel>
             </DockPanel>
+
+            <!--________________________________________________________-->
+            
         </Grid>
     </Border>
 </Window>
