@@ -1,6 +1,9 @@
-﻿using PongMe.Pages;
+﻿using PongMe.Model;
+using PongMe.Pages;
+using PongMe.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +26,12 @@ namespace PongMe
     {
         public Dictionary<string,Page> pages { get; private set; } = new Dictionary<string, Page>();
 
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
+            UserViewModel.Instance = new UserViewModel();
+            UserViewModel.Instance.CurrentUser = user;
+            this.DataContext = UserViewModel.Instance;
             pages.Add(typeof(Home).Name,new Home());
             this.Page.Content = pages["Home"];
             this.Close.Width /= 2;
@@ -34,8 +40,9 @@ namespace PongMe
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            if(e.LeftButton == MouseButtonState.Pressed)
+                if (e.ChangedButton == MouseButton.Left)
+                    this.DragMove();
         }
 
         private void Close_MouseDown(object sender, MouseButtonEventArgs e)
@@ -62,12 +69,12 @@ namespace PongMe
         {
             if (pages.ContainsKey("Example"))
             {
-                this.Page.Content = pages["Example"];
+                this.Page.Content = pages["Settings"];
             }
             else
             {
-                pages.Add(typeof(Example).Name, new Example());
-                this.Page.Content = pages["Example"];
+                pages.Add(typeof(Settings).Name, new Settings());
+                this.Page.Content = pages["Settings"];
             }
         }
 
@@ -83,5 +90,38 @@ namespace PongMe
                 this.Page.Content = pages["Settings"];
             }
         }
+
+        private void Faq_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string destinationurl = "https://github.com/Ncelad/PongMe/blob/main/README.md";
+            var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl)
+            {
+                UseShellExecute = true,
+            };
+            System.Diagnostics.Process.Start(sInfo);
+        }
+
+        //public BitmapImage LoadImage(byte[] imageData)
+        //{
+        //    var img = new BitmapImage();
+        //    using (MemoryStream stream = new MemoryStream(imageData))
+        //    {
+        //        try
+        //        {
+        //            img.BeginInit();
+
+        //            img.CacheOption = BitmapCacheOption.OnLoad;
+        //            img.StreamSource = stream;
+        //            img.DecodePixelWidth = ;
+
+        //            img.EndInit();
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
     }
 }

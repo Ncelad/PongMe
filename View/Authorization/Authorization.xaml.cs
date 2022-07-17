@@ -1,4 +1,4 @@
-﻿using PongMe.ViewModel;
+﻿using PongMe.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +11,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PongMe.Pages
+namespace PongMe.View.Authorization
 {
     /// <summary>
-    /// Логика взаимодействия для Settings.xaml
+    /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class Settings : Page
+    public partial class Authorization : Window
     {
-        public Settings()
+        public Authorization()
         {
             InitializeComponent();
-            this.DataContext = UserViewModel.Instance;
+            this.Page.Content = new Login();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+                if (e.ChangedButton == MouseButton.Left)
+                    this.DragMove();
         }
     }
 }

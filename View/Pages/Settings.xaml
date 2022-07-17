@@ -10,34 +10,46 @@
       Title="Settings">
 
     <Grid Background="WhiteSmoke">
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <!--_________________________________________________________________-->
-        
-        <StackPanel VerticalAlignment="Center" Grid.Column="0">
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
+
+        <Border BorderThickness="3" BorderBrush="Black" CornerRadius="200"  Grid.Column="1" Grid.Row="0" Margin="10 5">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding CurrentUser.Avatar}"></ImageBrush>
+            </Border.Background>
+        </Border>
+
+        <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Left" FontSize="15" FontFamily="Bahnschrift" Padding="0 35 0 5">
+            <Run Text="{Binding CurrentUser.Name}"></Run>
+            <Run Text="{Binding CurrentUser.Surname}"></Run>
+        </TextBlock>
+        <TextBlock Text="{Binding CurrentUser.Email}"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Left" FontSize="15" FontFamily="Bahnschrift" Padding="0 60 0 5"></TextBlock>
+
+        <!--_________________________________________________________________-->
+
+        <StackPanel VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
             <controls:Switch Margin="5 15"></controls:Switch>
             <controls:Switch Margin="5 15"></controls:Switch>
             <controls:Switch Margin="5 15"></controls:Switch>
             <controls:Switch Margin="5 15"></controls:Switch>
         </StackPanel>
-        
-        <StackPanel VerticalAlignment="Center" Grid.Column="2">
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
+        <StackPanel VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
             <controls:Switch Margin="5 15"></controls:Switch>
             <controls:Switch Margin="5 15"></controls:Switch>
             <controls:Switch Margin="5 15"></controls:Switch>
@@ -46,22 +58,13 @@
 
         <!--_________________________________________________________________-->
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="1">
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
+        <StackPanel VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
         </StackPanel>
-
-        <StackPanel VerticalAlignment="Center" Grid.Column="3">
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
+        <StackPanel VerticalAlignment="Center" Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
             <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>

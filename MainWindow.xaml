@@ -66,16 +66,18 @@
             
             <StackPanel Margin="10 0 0 0" Grid.ColumnSpan="2" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
                 <Image x:Name="Settings" Margin="10 25" Source="Materials/Icons/settings.png" Stretch="Uniform" MouseDown="Settings_MouseDown"></Image>
-                <Image x:Name="Share" Margin="10 25" Source="Materials/Icons/share.png" Stretch="Uniform"></Image>
-                <Image x:Name="Faq" Margin="10 25" Source="Materials/Icons/faq.png" Stretch="Uniform"></Image>
+                <Image x:Name="Faq" Margin="10 25" Source="Materials/Icons/faq.png" Stretch="Uniform" MouseDown="Faq_MouseDown"></Image>
             </StackPanel>
             <DockPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
                 <WrapPanel HorizontalAlignment="Right">
                     <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                        <TextBlock Text="Martin Turin" HorizontalAlignment="Center" FontSize="15" FontFamily="Bahnschrift" Padding="0 5"></TextBlock>
-                        <TextBlock Text="example@gmail.com" HorizontalAlignment="Center" FontSize="10" FontFamily="Bahnschrift"></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" FontSize="15" FontFamily="Bahnschrift" Padding="0 5">
+                            <Run Text="{Binding CurrentUser.Name}"></Run>
+                            <Run Text="{Binding CurrentUser.Surname}"></Run>
+                        </TextBlock>
+                        <TextBlock Text="{Binding CurrentUser.Email}" HorizontalAlignment="Center" FontSize="10" FontFamily="Bahnschrift"></TextBlock>
                     </StackPanel>
-                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="Materials/Photo/avatar.png" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
+                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="{Binding CurrentUser.Avatar}" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
                 </WrapPanel>
             </DockPanel>
 
