@@ -28,7 +28,7 @@ namespace PongMe.View.Authorization
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-                if (e.ChangedButton == MouseButton.Left)
+                if (e.ChangedButton == MouseButton.Left && e.ButtonState == MouseButtonState.Pressed)
                     this.DragMove();
         }
     }

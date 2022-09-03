@@ -39,7 +39,7 @@
         </TextBlock>
 
         <Border BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="2" CornerRadius="25" Background="GhostWhite">
-            <TextBox FontSize="30" Background="Transparent" BorderBrush="Transparent" Margin="15 5" Text="Email">
+            <TextBox x:Name="Email_TextBox" FontSize="30" Background="Transparent" BorderBrush="Transparent" Margin="15 5" Text="Email">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
@@ -55,7 +55,7 @@
             </TextBox>
         </Border>
         <Border BorderBrush="Black" BorderThickness="2" Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="2" CornerRadius="25" Background="GhostWhite">
-            <PasswordBox FontSize="30" Background="Transparent" BorderBrush="Transparent" Margin="15 5">
+            <PasswordBox x:Name="PasswordBox" FontSize="30" Background="Transparent" BorderBrush="Transparent" Margin="15 5">
                 <PasswordBox.Style>
                     <Style TargetType="PasswordBox">
                         <Style.Triggers>

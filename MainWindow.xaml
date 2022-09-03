@@ -69,7 +69,7 @@
                 <Image x:Name="Faq" Margin="10 25" Source="Materials/Icons/faq.png" Stretch="Uniform" MouseDown="Faq_MouseDown"></Image>
             </StackPanel>
             <DockPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
-                <WrapPanel HorizontalAlignment="Right">
+                <WrapPanel HorizontalAlignment="Right" Grid.ColumnSpan="2">
                     <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center" FontSize="15" FontFamily="Bahnschrift" Padding="0 5">
                             <Run Text="{Binding CurrentUser.Name}"></Run>
@@ -77,7 +77,7 @@
                         </TextBlock>
                         <TextBlock Text="{Binding CurrentUser.Email}" HorizontalAlignment="Center" FontSize="10" FontFamily="Bahnschrift"></TextBlock>
                     </StackPanel>
-                    <Image DockPanel.Dock="Right" Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="{Binding CurrentUser.Avatar}" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
+                    <Image Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="{Binding CurrentUser.AvatarImage}" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
                 </WrapPanel>
             </DockPanel>
 

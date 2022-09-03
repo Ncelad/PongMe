@@ -30,6 +30,7 @@ namespace PongMe
         {
             InitializeComponent();
             UserViewModel.Instance = new UserViewModel();
+            user.AvatarImage = new BitmapImage(new Uri($"Materials\\Avatars\\{user.Avatar}.png",UriKind.Relative));
             UserViewModel.Instance.CurrentUser = user;
             this.DataContext = UserViewModel.Instance;
             pages.Add(typeof(Home).Name,new Home());
@@ -67,7 +68,7 @@ namespace PongMe
 
         private void Avatar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (pages.ContainsKey("Example"))
+            if (pages.ContainsKey("Settings"))
             {
                 this.Page.Content = pages["Settings"];
             }

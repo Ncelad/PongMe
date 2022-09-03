@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,26 +33,58 @@ namespace PongMe.View.Pages
             Application.Current.MainWindow.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow(new User("Milosh", "Numerov", "mishnum@gmail.com", Encoding.ASCII.GetBytes("milosh1234"), ImageToBytes(new BitmapImage(new Uri("../../Materials/Icons/user.jpg", UriKind.Relative))))).Show();
-            Application.Current.MainWindow.Close();
-        }
+            string name = this.Name_TextBox.Text.Split(' ')[0].Replace(" ", "");
+            string surname = this.Name_TextBox.Text.Split(' ')[1].Replace(" ", "");
+            string email = this.Email_TextBox.Text.Replace(" ", "");
 
-        public byte[] ImageToBytes(BitmapImage image)
-        {
-            using (var stream = new MemoryStream())
+            if (Validation(name,surname,email))
             {
-                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(stream);
-                return stream.ToArray();
+                User user = new User(name, surname, email, Encoding.ASCII.GetBytes(this.PasswordBox.Password), "avatar-0");
+                UserRepository.CreateUser(user);
+                new MainWindow(await UserRepository.ReadUsers(user)).Show();
+                Application.Current.MainWindow.Close();
             }
         }
+
 
         private void Login_MouseDown(object sender, MouseButtonEventArgs e)
         {
             (Application.Current.MainWindow as Authorization.Authorization).Page.Content = new Login();
+        }
+
+        public bool Validation(string name, string surname, string email)
+        {
+
+            Regex regex = new Regex("[A-Za-z]");
+
+
+            foreach (var c in name)
+            {
+                if (!regex.IsMatch(c.ToString()))
+                {
+                    MessageBox.Show("Name must contain only letters!");
+                    return false;
+                }
+            }
+
+            foreach (var c in surname)
+            {
+                if (!regex.IsMatch(c.ToString()))
+                {
+                    MessageBox.Show("Surname must contain only letters!");
+                    return false;
+                }
+            }
+
+            if (!email.Contains("@gmail.com"))
+            {
+                MessageBox.Show("Email must contain \"@gmail.com\"!");
+                return false;
+            }
+
+            return true;
         }
     }
 }

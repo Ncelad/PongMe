@@ -35,7 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserRepository.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\Authorization\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
@@ -130,6 +138,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,7 +171,7 @@
   <ItemGroup>
     <Resource Include="Materials\Icons\faq.png" />
     <Resource Include="Materials\Icons\share.png" />
-    <Resource Include="Materials\Photo\avatar.png" />
+    <Resource Include="Materials\Avatars\avatar-0.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Materials\Icons\user.jpg" />

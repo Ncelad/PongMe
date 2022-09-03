@@ -32,10 +32,35 @@ namespace PongMe.View.Pages
             Application.Current.MainWindow.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow(new User("Milosh", "Numerov", "mishnum@gmail.com", Encoding.ASCII.GetBytes("milosh1234"), ImageToBytes(new BitmapImage(new Uri("../../Materials/Icons/logo.png", UriKind.Relative))))).Show();
-            Application.Current.MainWindow.Close();
+            string email = this.Email_TextBox.Text.Replace(" ", "");
+            if (Validation(email,this.PasswordBox.Password))
+            {
+                User user = new User(email, Encoding.ASCII.GetBytes(this.PasswordBox.Password));
+                User confirm = await UserRepository.ReadUsers(user);
+                if (confirm.Email.Replace(" ", "") == user.Email.Replace(" ", ""))
+                {
+                    if(Encoding.ASCII.GetString(confirm.Password) == Encoding.ASCII.GetString(user.Password))
+                    {
+                        new MainWindow(confirm).Show();
+                        Application.Current.MainWindow.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect password");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect email!");
+                }
+            }
+        }
+
+        private void Register_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            (Application.Current.MainWindow as Authorization.Authorization).Page.Content = new Register();
         }
 
         public byte[] ImageToBytes(BitmapImage image)
@@ -49,9 +74,21 @@ namespace PongMe.View.Pages
             }
         }
 
-        private void Register_MouseDown(object sender, MouseButtonEventArgs e)
+        public bool Validation(string email, string password)
         {
-            (Application.Current.MainWindow as Authorization.Authorization).Page.Content = new Register();
+
+            if (!email.Contains("@gmail.com"))
+            {
+                MessageBox.Show("Email must contain \"@gmail.com\"!");
+                return false;
+            }
+            if(string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Password field cannot be empty!");
+                return false;
+            }
+
+            return true;
         }
     }
 }

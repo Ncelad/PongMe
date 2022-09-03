@@ -31,7 +31,7 @@
 
         <Border BorderThickness="3" BorderBrush="Black" CornerRadius="200"  Grid.Column="1" Grid.Row="0" Margin="10 5">
             <Border.Background>
-                <ImageBrush ImageSource="{Binding CurrentUser.Avatar}"></ImageBrush>
+                <ImageBrush x:Name="Avatar"  ImageSource="{Binding CurrentUser.AvatarImage}"></ImageBrush>
             </Border.Background>
         </Border>
 
