@@ -171,9 +171,31 @@
   <ItemGroup>
     <Resource Include="Materials\Icons\faq.png" />
     <Resource Include="Materials\Icons\share.png" />
-    <Resource Include="Materials\Avatars\avatar-0.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Materials\Avatars\avatar.png" />
+    <Resource Include="Materials\Avatars\men\man-1.png" />
+    <Resource Include="Materials\Avatars\men\man-10.png" />
+    <Resource Include="Materials\Avatars\men\man-2.png" />
+    <Resource Include="Materials\Avatars\men\man-3.png" />
+    <Resource Include="Materials\Avatars\men\man-4.png" />
+    <Resource Include="Materials\Avatars\men\man-5.png" />
+    <Resource Include="Materials\Avatars\men\man-6.png" />
+    <Resource Include="Materials\Avatars\men\man-7.png" />
+    <Resource Include="Materials\Avatars\men\man-8.png" />
+    <Resource Include="Materials\Avatars\men\man-9.png" />
+    <Resource Include="Materials\Avatars\user.png" />
+    <Resource Include="Materials\Avatars\women\woman-1.png" />
+    <Resource Include="Materials\Avatars\women\woman-10.png" />
+    <Resource Include="Materials\Avatars\women\woman-2.png" />
+    <Resource Include="Materials\Avatars\women\woman-3.png" />
+    <Resource Include="Materials\Avatars\women\woman-4.png" />
+    <Resource Include="Materials\Avatars\women\woman-5.png" />
+    <Resource Include="Materials\Avatars\women\woman-6.png" />
+    <Resource Include="Materials\Avatars\women\woman-7.png" />
+    <Resource Include="Materials\Avatars\women\woman-8.png" />
+    <Resource Include="Materials\Avatars\women\woman-9.png" />
+    <Resource Include="Materials\Icons\add.png" />
     <Content Include="Materials\Icons\user.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

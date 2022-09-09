@@ -70,8 +70,8 @@
                 </PasswordBox.Style>
             </PasswordBox>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="6" CornerRadius="25" Background="GhostWhite">
-            <TextBlock Text="Login" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" MouseDown="Button_Click"></TextBlock>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.Column="3" Grid.Row="6" CornerRadius="25" Background="GhostWhite" MouseDown="Button_Click">
+            <TextBlock Text="Login" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"></TextBlock>
         </Border>
         <TextBlock Text="Not registered yet? Register!" Foreground="Blue" Grid.Column="2" Grid.Row="8" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0 5 0 0" MouseDown="Register_MouseDown"></TextBlock>
     </Grid>

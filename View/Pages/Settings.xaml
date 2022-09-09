@@ -15,21 +15,26 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1.75*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <!--_________________________________________________________________-->
 
-        <Border BorderThickness="3" BorderBrush="Black" CornerRadius="200"  Grid.Column="1" Grid.Row="0" Margin="10 5">
+        <Border BorderThickness="3" BorderBrush="Black" CornerRadius="200"  Grid.Column="1" Grid.RowSpan="2" Grid.Row="0" Margin="10 5">
             <Border.Background>
                 <ImageBrush x:Name="Avatar"  ImageSource="{Binding CurrentUser.AvatarImage}"></ImageBrush>
             </Border.Background>
@@ -43,32 +48,19 @@
 
         <!--_________________________________________________________________-->
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-        </StackPanel>
-        <StackPanel VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
-            <controls:Switch Margin="5 15"></controls:Switch>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="Gender" FontSize="18" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Background="Transparent">
+            <RadioButton x:Name="Man" Margin="20 0" Background="LightSkyBlue" Content="Man" BorderBrush="Black" BorderThickness="2" Checked="Man_Checked"></RadioButton>
+            <RadioButton x:Name="Woman" Margin="20 0" Background="LightPink" Content="Woman" BorderBrush="Black" BorderThickness="2" Checked="Woman_Checked"></RadioButton>
+            <RadioButton x:Name="None" Margin="20 0" Background="Gray" Content="None" BorderBrush="Black" BorderThickness="2" Checked="None_Checked"></RadioButton>
         </StackPanel>
 
-        <!--_________________________________________________________________-->
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="Age" FontSize="18" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBox x:Name="AgeTextBox" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" TextChanged="AgeTextBox_TextChanged" PreviewTextInput="AgeTextBox_PreviewTextInput" Width="30" Height="30" TextAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"></TextBox>
+        <Slider x:Name="AgeSlider" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="3" Margin="20 0" VerticalAlignment="Center" SmallChange="1.0" TickFrequency="10"  AutoToolTipPlacement="TopLeft" Minimum="1" Maximum="120" Value="{Binding ElementName=AgeTextBox, Path=Text}"></Slider>
+        <Border BorderBrush="Black" BorderThickness="2"  Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3" CornerRadius="15" Background="GhostWhite" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="ChangeAvatar_MouseDown">
+            <TextBlock FontSize="20" FontFamily="Malgun Gothic" FontWeight="Heavy" Text="Change avavtar" Margin="5"></TextBlock>
+        </Border>
 
-        <StackPanel VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-        </StackPanel>
-        <StackPanel VerticalAlignment="Center" Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-            <TextBlock Margin="5 15" Text="Prop" FontSize="20"></TextBlock>
-        </StackPanel>
     </Grid>
 </Page>

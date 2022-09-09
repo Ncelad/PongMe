@@ -13,6 +13,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
+        Closing="Window_Closing"
         ResizeMode="NoResize">
 
     <Border CornerRadius="25" Background="WhiteSmoke">
@@ -80,6 +81,8 @@
                     <Image Grid.Row="4" Grid.Column="2" x:Name="Avatar" Margin="20 15" Source="{Binding CurrentUser.AvatarImage}" Stretch="Uniform" MouseDown="Avatar_MouseDown"></Image>
                 </WrapPanel>
             </DockPanel>
+
+            <Image x:Name="AddButon" Source="Materials/Icons/add.png" Grid.Row="3" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3" Width="60" Height="60" Margin="0 80 0 50"></Image>
 
             <!--________________________________________________________-->
             

@@ -30,8 +30,8 @@ namespace PongMe
         {
             InitializeComponent();
             UserViewModel.Instance = new UserViewModel();
-            user.AvatarImage = new BitmapImage(new Uri($"Materials\\Avatars\\{user.Avatar}.png",UriKind.Relative));
             UserViewModel.Instance.CurrentUser = user;
+            SetAvatar(user);
             this.DataContext = UserViewModel.Instance;
             pages.Add(typeof(Home).Name,new Home());
             this.Page.Content = pages["Home"];
@@ -55,6 +55,7 @@ namespace PongMe
 
         private void Logo_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            this.AddButon.Visibility = Visibility.Visible;
             if (pages.ContainsKey("Home"))
             {
                 this.Page.Content = pages["Home"];
@@ -68,6 +69,7 @@ namespace PongMe
 
         private void Avatar_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            this.AddButon.Visibility = Visibility.Hidden;
             if (pages.ContainsKey("Settings"))
             {
                 this.Page.Content = pages["Settings"];
@@ -81,6 +83,7 @@ namespace PongMe
 
         private void Settings_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            this.AddButon.Visibility = Visibility.Hidden;
             if (pages.ContainsKey("Settings"))
             {
                 this.Page.Content = pages["Settings"];
@@ -102,27 +105,24 @@ namespace PongMe
             System.Diagnostics.Process.Start(sInfo);
         }
 
-        //public BitmapImage LoadImage(byte[] imageData)
-        //{
-        //    var img = new BitmapImage();
-        //    using (MemoryStream stream = new MemoryStream(imageData))
-        //    {
-        //        try
-        //        {
-        //            img.BeginInit();
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserRepository.UpdateUser(UserViewModel.Instance.CurrentUser);
+        }
 
-        //            img.CacheOption = BitmapCacheOption.OnLoad;
-        //            img.StreamSource = stream;
-        //            img.DecodePixelWidth = ;
-
-        //            img.EndInit();
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
+        public void SetAvatar(User user)
+        {
+            if (user.Avatar == "user")
+            {
+                user.AvatarImage = new BitmapImage(new Uri($"Materials\\Avatars\\{user.Avatar}.png", UriKind.Relative));
+            }
+            else
+            {
+                user.AvatarImage = new BitmapImage(new Uri($"Materials\\Avatars\\{ user.Gender.ToLower().Replace("a", "e") }\\{user.Avatar}.png", UriKind.Relative));
+            
+            }
+            this.Avatar.Source = user.AvatarImage;
+            
+        }
     }
 }

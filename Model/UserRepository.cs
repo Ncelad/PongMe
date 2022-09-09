@@ -24,7 +24,7 @@ namespace PongMe.Model
                 {
                     client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = client.PostAsync("user", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                    HttpResponseMessage http = client.PostAsync("user/create", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
                     if (http.IsSuccessStatusCode)
                     {
                         MessageBox.Show(await http.Content.ReadAsStringAsync());
@@ -98,17 +98,29 @@ namespace PongMe.Model
             }
         }
 
-        public static async void UpdateUser(User user)
+        public static void UpdateUser(User user)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage http = await client.PutAsync($"user/{user.Id}", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json"));
-                if (http.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    MessageBox.Show(await http.Content.ReadAsStringAsync());
+                    client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage http = client.PostAsync($"user/update", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                    if (http.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
             }
         }
 
