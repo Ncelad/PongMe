@@ -43,7 +43,7 @@ namespace PongMe.View.Pages
             {
                 User user = new User(name, surname, email, Encoding.ASCII.GetBytes(this.PasswordBox.Password), "user");
                 UserRepository.CreateUser(user);
-                new MainWindow(await UserRepository.ReadUsers(user)).Show();
+                new MainWindow(await UserRepository.ReadUsers(user.Email)).Show();
                 Application.Current.MainWindow.Close();
             }
         }

@@ -82,7 +82,7 @@
                 </WrapPanel>
             </DockPanel>
 
-            <Image x:Name="AddButon" Source="Materials/Icons/add.png" Grid.Row="3" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3" Width="60" Height="60" Margin="0 80 0 50"></Image>
+            <Image x:Name="AddButon" Source="Materials/Icons/add.png" Grid.Row="3" HorizontalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3" Width="60" Height="60" Margin="0 80 0 50" MouseDown="AddButon_MouseDown"></Image>
 
             <!--________________________________________________________-->
             

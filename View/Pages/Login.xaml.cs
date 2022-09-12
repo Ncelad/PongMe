@@ -38,7 +38,7 @@ namespace PongMe.View.Pages
             if (Validation(email,this.PasswordBox.Password))
             {
                 User user = new User(email, Encoding.ASCII.GetBytes(this.PasswordBox.Password));
-                User confirm = await UserRepository.ReadUsers(user);
+                User confirm = await UserRepository.ReadUsers(user.Email);
                 if (confirm.Email.Replace(" ", "") == user.Email.Replace(" ", ""))
                 {
                     if(Encoding.ASCII.GetString(confirm.Password) == Encoding.ASCII.GetString(user.Password))

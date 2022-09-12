@@ -8,9 +8,52 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Home">
 
-    <Canvas>
-        <Canvas.Background>
-            <ImageBrush Opacity="0.6" ImageSource="../../Materials/Photo/bg.png"></ImageBrush>
-        </Canvas.Background>
-    </Canvas>
+    <Page.Resources>
+        <Style x:Key="Item" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Opacity="0.6" ImageSource="../../Materials/Photo/bg-main_page.png"></ImageBrush>
+        </Grid.Background>
+        <ListBox BorderThickness="0" x:Name="MatchesListBox" Background="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="Match">
+                    <Border Margin="15" Background="WhiteSmoke" CornerRadius="30" BorderThickness="5" BorderBrush="Black" Opacity="0.9" Width="600">
+                        <ListBoxItem FontSize="60" Style="{StaticResource Item}">
+                            <StackPanel Margin="20">
+                                <TextBlock FontSize="20" FontWeight="Bold">
+                                    <Run Text="{Binding Creator.Name}"></Run>
+                                    <Run Text="{Binding Creator.Surname}"></Run>
+                                </TextBlock>
+                                <TextBlock FontSize="10">
+                                    <Run Text="{Binding Place}"></Run>
+                                    <Run Text="{Binding Time}"></Run>
+                                </TextBlock>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </Page>

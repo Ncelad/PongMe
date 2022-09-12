@@ -1,22 +1,18 @@
-﻿using Dapper;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
 
 namespace PongMe.Model
 {
-    static class UserRepository
+    class MatchRepository
     {
-
-        public static async void CreateUser(User user)
+        public static async void CreateMatch(Match match)
         {
             try
             {
@@ -24,7 +20,7 @@ namespace PongMe.Model
                 {
                     client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = client.PostAsync("user/create", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                    HttpResponseMessage http = client.PostAsync("match/create", new StringContent(JsonConvert.SerializeObject(match), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
                     if (http.IsSuccessStatusCode)
                     {
                         MessageBox.Show(await http.Content.ReadAsStringAsync());
@@ -42,19 +38,19 @@ namespace PongMe.Model
             }
         }
 
-        public static async Task<List<User>> ReadUsers()
+        public static async Task<List<Match>> ReadMatches()
         {
-            List<User> users = new List<User>();
+            List<Match> users = new List<Match>();
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = await client.GetAsync("user");
+                    HttpResponseMessage http = await client.GetAsync("match");
                     if (http.IsSuccessStatusCode)
                     {
-                        users = JsonConvert.DeserializeObject<List<User>>(await http.Content.ReadAsStringAsync());
+                        users = JsonConvert.DeserializeObject<List<Match>>(await http.Content.ReadAsStringAsync());
                         return users;
                     }
                     else
@@ -70,20 +66,20 @@ namespace PongMe.Model
             }
         }
 
-        public static async Task<User> ReadUsers(string Email)
+        public static async Task<Match> ReadMatches(Match m)
         {
-            User user = new User();
+            Match match = new Match();
             try
             {
-                using(HttpClient client = new HttpClient())
+                using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = await client.GetAsync($"user/email/{Email}");
+                    HttpResponseMessage http = await client.GetAsync($"match/{m.Place}");
                     if (http.IsSuccessStatusCode)
                     {
-                        user = JsonConvert.DeserializeObject<User>(await http.Content.ReadAsStringAsync());
-                        return user;
+                        match = JsonConvert.DeserializeObject<Match>(await http.Content.ReadAsStringAsync());
+                        return match;
                     }
                     else
                     {
@@ -98,35 +94,7 @@ namespace PongMe.Model
             }
         }
 
-        public static async Task<User> ReadUsers(int Id)
-        {
-            User user = new User();
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = await client.GetAsync($"user/id/{Id}");
-                    if (http.IsSuccessStatusCode)
-                    {
-                        user = JsonConvert.DeserializeObject<User>(await http.Content.ReadAsStringAsync());
-                        return user;
-                    }
-                    else
-                    {
-                        throw new Exception(http.StatusCode.ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw ex;
-            }
-        }
-
-        public static void UpdateUser(User user)
+        public static void UpdateMatch(Match match)
         {
             try
             {
@@ -134,7 +102,7 @@ namespace PongMe.Model
                 {
                     client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage http = client.PostAsync($"user/update", new StringContent(JsonConvert.SerializeObject(user), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                    HttpResponseMessage http = client.PostAsync($"match/update", new StringContent(JsonConvert.SerializeObject(match), UnicodeEncoding.UTF8, "application/json")).GetAwaiter().GetResult();
                     if (http.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Success");
@@ -152,13 +120,13 @@ namespace PongMe.Model
             }
         }
 
-        public static async void DeleteUser(User user)
+        public static async void DeleteMatch(Match match)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://ncelad-001-site1.ftempurl.com/");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage http = await client.DeleteAsync($"user/{user.Id}");
+                HttpResponseMessage http = await client.DeleteAsync($"match/{match.Id}");
                 if (http.IsSuccessStatusCode)
                 {
                     MessageBox.Show(await http.Content.ReadAsStringAsync());
@@ -168,3 +136,4 @@ namespace PongMe.Model
 
     }
 }
+

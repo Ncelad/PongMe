@@ -1,5 +1,6 @@
 ﻿using PongMe.Model;
 using PongMe.Pages;
+using PongMe.View.Pages;
 using PongMe.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -123,6 +124,20 @@ namespace PongMe
             }
             this.Avatar.Source = user.AvatarImage;
             
+        }
+
+        private void AddButon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.AddButon.Visibility = Visibility.Hidden;
+            if (pages.ContainsKey("CreateMatch"))
+            {
+                this.Page.Content = pages["CreateMatch"];
+            }
+            else
+            {
+                pages.Add(typeof(CreateMatch).Name, new CreateMatch());
+                this.Page.Content = pages["CreateMatch"];
+            }
         }
     }
 }

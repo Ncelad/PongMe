@@ -57,6 +57,5 @@ namespace PongMe.Model
             this.Avatar = avatar;
             this.Gender = gender;
         }
-
     }
 }
