@@ -29,26 +29,85 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ListBoxtemStyleNoHighlighting" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="fillColor" Fill="#FFBADDE9" IsHitTestVisible="False" Opacity="0" RadiusY="1" RadiusX="1"/>
+                            <Rectangle x:Name="fillColor2" Fill="#FFBADDE9" IsHitTestVisible="False" Opacity="0" RadiusY="1" RadiusX="1"/>
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+                            <Rectangle x:Name="FocusVisualElement" RadiusY="1" RadiusX="1" Stroke="#FF6DBDD1" StrokeThickness="1" Visibility="Collapsed"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush Opacity="0.6" ImageSource="../../Materials/Photo/bg-main_page.png"></ImageBrush>
         </Grid.Background>
-        <ListBox BorderThickness="0" x:Name="MatchesListBox" Background="Transparent">
+        <Border BorderBrush="Black" Grid.Row="0" BorderThickness="3" CornerRadius="25" Background="GhostWhite" Width="350" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Panel.ZIndex="1">
+            <TextBox x:Name="Search_TextBox" VerticalContentAlignment="Center" Margin="10" Background="Transparent" BorderBrush="Transparent" TextChanged="Search_TextBox_TextChanged">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="BorderThickness" Value="0"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="0"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </Border>
+        <ListBox Grid.Row="1" BorderThickness="0" x:Name="MatchesListBox" Background="Transparent" ScrollViewer.CanContentScroll="False" ItemContainerStyle="{StaticResource ListBoxtemStyleNoHighlighting}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="Match">
-                    <Border Margin="15" Background="WhiteSmoke" CornerRadius="30" BorderThickness="5" BorderBrush="Black" Opacity="0.9" Width="600">
+                    <Border Margin="0 60 0 0" Background="Crimson" CornerRadius="30" BorderThickness="5" BorderBrush="Black" Opacity="0.9" Width="600" HorizontalAlignment="Center">
                         <ListBoxItem FontSize="60" Style="{StaticResource Item}">
-                            <StackPanel Margin="20">
-                                <TextBlock FontSize="20" FontWeight="Bold">
-                                    <Run Text="{Binding Creator.Name}"></Run>
-                                    <Run Text="{Binding Creator.Surname}"></Run>
-                                </TextBlock>
-                                <TextBlock FontSize="10">
-                                    <Run Text="{Binding Place}"></Run>
-                                    <Run Text="{Binding Time}"></Run>
-                                </TextBlock>
+                            <StackPanel Orientation="Horizontal" Margin="20">
+                                <Border BorderThickness="3" BorderBrush="WhiteSmoke" CornerRadius="200" Margin="10 5" Width="70" Height="70">
+                                    <Border.Background>
+                                        <ImageBrush x:Name="Avatar"  ImageSource="{Binding Creator.AvatarImage}"></ImageBrush>
+                                    </Border.Background>
+                                </Border>
+                                <StackPanel>
+                                    <TextBlock FontSize="20" FontWeight="Bold">
+                                    <Run Text="{Binding Creator.Name}" Foreground="WhiteSmoke"></Run>
+                                    <Run Text="{Binding Creator.Surname}" Foreground="WhiteSmoke"></Run>
+                                    </TextBlock>
+                                    <TextBlock FontSize="10">
+                                    <Run Text="{Binding Place}" Foreground="WhiteSmoke"></Run>
+                                    <Run Text="{Binding Time}" Foreground="WhiteSmoke"></Run>
+                                    </TextBlock>
+                                </StackPanel>
                             </StackPanel>
                         </ListBoxItem>
                     </Border>

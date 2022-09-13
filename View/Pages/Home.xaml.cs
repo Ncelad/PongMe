@@ -27,6 +27,10 @@ namespace PongMe.Pages
             InitializeComponent();
             this.DataContext = MatchViewModel.Instance;
             MatchViewModel.Instance = new MatchViewModel();
+            this.Search_TextBox.GotFocus += RemoveText;
+            this.Search_TextBox.LostFocus += AddText;
+            this.Search_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+            this.Search_TextBox.Text = "Search matches by place";
             GetMatches();
         }
 
@@ -44,8 +48,73 @@ namespace PongMe.Pages
             foreach (var item in MatchViewModel.Instance.Matches)
             {
                 item.Creator = await UserRepository.ReadUsers(item.CreatorId);
+                if (item.Creator.Avatar == "user")
+                {
+                    item.Creator.AvatarImage = new BitmapImage(new Uri($"..\\..\\Materials\\Avatars\\{item.Creator.Avatar}.png", UriKind.Relative));
+                }
+                else
+                {
+                    item.Creator.AvatarImage = new BitmapImage(new Uri($"..\\..\\Materials\\Avatars\\{ item.Creator.Gender.ToLower().Replace("a", "e") }\\{item.Creator.Avatar}.png", UriKind.Relative));
+
+                }
             }
             this.MatchesListBox.ItemsSource = MatchViewModel.Instance.Matches;
+        }
+
+        public void AddText(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(this.Search_TextBox.Text))
+            {
+                this.Search_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+                this.Search_TextBox.Text = "Search matches by place";
+            }
+
+        }
+
+        public void RemoveText(object sender, EventArgs e)
+        {
+            if (this.Search_TextBox.Text == "Search matches by place")
+            {
+                this.Search_TextBox.Foreground = new SolidColorBrush(Colors.Black);
+                this.Search_TextBox.Text = "";
+            }
+        }
+
+        private async void Search_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                List<Match> matches = new List<Match>();
+                if (!string.IsNullOrWhiteSpace((sender as TextBox).Text))
+                {
+                    matches = await MatchRepository.ReadMatches(new Match() { Place = (sender as TextBox).Text });
+                }
+                if(matches.Count != 0 && matches[0].Place != null)
+                {
+                    foreach (var item in matches)
+                    {
+                        item.Creator = await UserRepository.ReadUsers(item.CreatorId);
+                        if (item.Creator.Avatar == "user")
+                        {
+                            item.Creator.AvatarImage = new BitmapImage(new Uri($"..\\..\\Materials\\Avatars\\{item.Creator.Avatar}.png", UriKind.Relative));
+                        }
+                        else
+                        {
+                            item.Creator.AvatarImage = new BitmapImage(new Uri($"..\\..\\Materials\\Avatars\\{ item.Creator.Gender.ToLower().Replace("a", "e") }\\{item.Creator.Avatar}.png", UriKind.Relative));
+
+                        }
+                    }
+                    this.MatchesListBox.ItemsSource = matches;
+                }
+                else
+                {
+                    this.MatchesListBox.ItemsSource = new List<Match>();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -25,6 +25,11 @@ namespace PongMe.View.Pages
         public Login()
         {
             InitializeComponent();
+            this.Email_TextBox.GotFocus += RemoveText;
+            this.Email_TextBox.LostFocus += AddText;
+            this.Email_TextBox.FontSize = 26;
+            this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+            this.Email_TextBox.Text = "Email(example@gmail.com)";
         }
 
         private void Close_MouseDown(object sender, MouseButtonEventArgs e)
@@ -39,16 +44,23 @@ namespace PongMe.View.Pages
             {
                 User user = new User(email, Encoding.ASCII.GetBytes(this.PasswordBox.Password));
                 User confirm = await UserRepository.ReadUsers(user.Email);
-                if (confirm.Email.Replace(" ", "") == user.Email.Replace(" ", ""))
+                if(confirm.Email != null)
                 {
-                    if(Encoding.ASCII.GetString(confirm.Password) == Encoding.ASCII.GetString(user.Password))
+                    if (confirm.Email.Replace(" ", "") == user.Email.Replace(" ", ""))
                     {
-                        new MainWindow(confirm).Show();
-                        Application.Current.MainWindow.Close();
+                        if (Encoding.ASCII.GetString(confirm.Password) == Encoding.ASCII.GetString(user.Password))
+                        {
+                            new MainWindow(confirm).Show();
+                            Application.Current.MainWindow.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect password");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Incorrect password");
+                        MessageBox.Show("Incorrect email!");
                     }
                 }
                 else
@@ -89,6 +101,27 @@ namespace PongMe.View.Pages
             }
 
             return true;
+        }
+
+        public void AddText(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(this.Email_TextBox.Text))
+            {
+                this.Email_TextBox.FontSize = 26;
+                this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+                this.Email_TextBox.Text = "Email(example@gmail.com)";
+            }
+
+        }
+
+        public void RemoveText(object sender, EventArgs e)
+        {
+            if(this.Email_TextBox.Text == "Email(example@gmail.com)")
+            {
+                this.Email_TextBox.FontSize = 30;
+                this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Black);
+                this.Email_TextBox.Text = "";
+            }
         }
     }
 }

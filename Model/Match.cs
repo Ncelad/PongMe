@@ -1,4 +1,5 @@
-﻿using PongMe.ViewModel;
+﻿using Newtonsoft.Json;
+using PongMe.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,8 @@ namespace PongMe.Model
     class Match
     {
         public int Id { get; set; }
-
         public string Place { get; set; }
-
         public DateTime Time { get; set; }
-
         public int CreatorId { get; set; }
 
         private User creator = new User() { Name = "Default", Surname = "Default"};
@@ -31,7 +29,7 @@ namespace PongMe.Model
             }
             set { creator = value; }
         }
-
+        [JsonProperty("OpponentId")]
         public int OpponentId { get; set; }
 
         public User Opponent { get; set; }

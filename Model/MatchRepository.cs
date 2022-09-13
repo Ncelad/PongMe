@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.Data.Json;
 
 namespace PongMe.Model
 {
@@ -66,9 +68,9 @@ namespace PongMe.Model
             }
         }
 
-        public static async Task<Match> ReadMatches(Match m)
+        public static async Task<List<Match>> ReadMatches(Match m)
         {
-            Match match = new Match();
+            List<Match> matches = new List<Match>();
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -78,8 +80,8 @@ namespace PongMe.Model
                     HttpResponseMessage http = await client.GetAsync($"match/{m.Place}");
                     if (http.IsSuccessStatusCode)
                     {
-                        match = JsonConvert.DeserializeObject<Match>(await http.Content.ReadAsStringAsync());
-                        return match;
+                        matches = JsonConvert.DeserializeObject<List<Match>>(await http.Content.ReadAsStringAsync());
+                        return matches;
                     }
                     else
                     {

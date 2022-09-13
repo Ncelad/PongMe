@@ -26,6 +26,15 @@ namespace PongMe.View.Pages
         public Register()
         {
             InitializeComponent();
+            this.Name_TextBox.GotFocus += RemoveText;
+            this.Name_TextBox.LostFocus += AddText;
+            this.Name_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+            this.Name_TextBox.Text = "Name Surname";
+
+            this.Email_TextBox.GotFocus += RemoveText;
+            this.Email_TextBox.LostFocus += AddText;
+            this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+            this.Email_TextBox.Text = "Email(example@gmail.com)";
         }
 
         private void Close_MouseDown(object sender, MouseButtonEventArgs e)
@@ -85,6 +94,37 @@ namespace PongMe.View.Pages
             }
 
             return true;
+        }
+
+        public void AddText(object sender, EventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (textBox.Name == "Name_TextBox" && string.IsNullOrWhiteSpace(this.Name_TextBox.Text))
+            {
+                this.Name_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+                this.Name_TextBox.Text = "Name Surname";
+            }
+            else if (textBox.Name == "Email_TextBox" && string.IsNullOrWhiteSpace(this.Email_TextBox.Text))
+            {
+                this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Gray);
+                this.Email_TextBox.Text = "Email(example@gmail.com)";
+            }
+
+        }
+
+        public void RemoveText(object sender, EventArgs e)
+        {
+            var textBox = (sender as TextBox);
+            if (textBox.Name == "Name_TextBox" && this.Name_TextBox.Text == "Name Surname")
+            {
+                this.Name_TextBox.Foreground = new SolidColorBrush(Colors.Black);
+                this.Name_TextBox.Text = "";
+            }
+            else if (textBox.Name == "Email_TextBox" && this.Email_TextBox.Text == "Email(example@gmail.com)")
+            {
+                this.Email_TextBox.Foreground = new SolidColorBrush(Colors.Black);
+                this.Email_TextBox.Text = "";
+            }
         }
     }
 }

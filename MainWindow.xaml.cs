@@ -57,15 +57,7 @@ namespace PongMe
         private void Logo_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.AddButon.Visibility = Visibility.Visible;
-            if (pages.ContainsKey("Home"))
-            {
-                this.Page.Content = pages["Home"];
-            }
-            else
-            {
-                pages.Add(typeof(Home).Name, new Home());
-                this.Page.Content = pages["Home"];
-            }
+            this.Page.Content = new Home();
         }
 
         private void Avatar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -122,22 +114,13 @@ namespace PongMe
                 user.AvatarImage = new BitmapImage(new Uri($"Materials\\Avatars\\{ user.Gender.ToLower().Replace("a", "e") }\\{user.Avatar}.png", UriKind.Relative));
             
             }
-            this.Avatar.Source = user.AvatarImage;
-            
+            this.Avatar.Source = user.AvatarImage;        
         }
 
         private void AddButon_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.AddButon.Visibility = Visibility.Hidden;
-            if (pages.ContainsKey("CreateMatch"))
-            {
-                this.Page.Content = pages["CreateMatch"];
-            }
-            else
-            {
-                pages.Add(typeof(CreateMatch).Name, new CreateMatch());
-                this.Page.Content = pages["CreateMatch"];
-            }
+            this.Page.Content = new CreateMatch();
         }
     }
 }

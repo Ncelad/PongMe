@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:PongMe"
              StartupUri="View/Authorization/Authorization.xaml">
     <Application.Resources>
-        
+
     </Application.Resources>
 </Application>
